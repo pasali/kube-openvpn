@@ -91,9 +91,12 @@ if [ -r $OVPN_CRL ]; then
 fi
 
 # Optional OTP authentication support
-if [ -d "${OVPN_OTP_AUTH:-}" ]; then
+if [ "$OVPN_OTP_AUTH" == "1"  ]; then
     addArg "--plugin" "/usr/lib/openvpn/plugins/openvpn-plugin-auth-pam.so" "openvpn"
     addArg "--reneg-sec" "0"
+    mkdir -p ${OPENVPN_OTP_PATH}
+    # configMaps are read only so in order to work google-authenticator we need to move files somewhere we can edit permissions
+    /sbin/watch-otp.sh &
 fi
 
 if [ -n "${OVPN_MANAGEMENT_PORT}" ]; then

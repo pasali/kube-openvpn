@@ -5,8 +5,13 @@ MAINTAINER Pieter Lange <pieter@ptlc.nl>
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
+<<<<<<< HEAD
     apk add --update openvpn=2.4.7-r1 \
       bash easy-rsa libintl inotify-tools openvpn-auth-pam google-authenticator pamtester && \
+=======
+    apk add --update openvpn=2.4.4-r1 \
+      bash easy-rsa=3.0.3-r0 libintl inotify-tools openvpn-auth-pam google-authenticator pamtester && \
+>>>>>>> Make some arrangement for otp
     apk add --virtual temppkg gettext &&  \
     cp /usr/bin/envsubst /usr/local/bin/envsubst && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
@@ -15,6 +20,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repo
 
 # Needed by scripts
 ENV OPENVPN /etc/openvpn
+ENV OPENVPN_OTP_PATH $OPENVPN/otp
 ENV OVPN_TEMPLATE $OPENVPN/templates/openvpn.tmpl
 ENV OVPN_CONFIG $OPENVPN/openvpn.conf
 
