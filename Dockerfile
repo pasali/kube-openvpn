@@ -1,17 +1,12 @@
 # Smallest base image
-FROM alpine:3.10
+FROM alpine:3.11
 
 MAINTAINER Pieter Lange <pieter@ptlc.nl>
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
-<<<<<<< HEAD
-    apk add --update openvpn=2.4.7-r1 \
-      bash easy-rsa libintl inotify-tools openvpn-auth-pam google-authenticator pamtester && \
-=======
-    apk add --update openvpn=2.4.4-r1 \
-      bash easy-rsa=3.0.3-r0 libintl inotify-tools openvpn-auth-pam google-authenticator pamtester && \
->>>>>>> Make some arrangement for otp
+    apk add --update openvpn=2.4.8-r0 \
+      bash easy-rsa=3.0.6-r0 libintl inotify-tools openvpn-auth-pam google-authenticator pamtester && \
     apk add --virtual temppkg gettext &&  \
     cp /usr/bin/envsubst /usr/local/bin/envsubst && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
